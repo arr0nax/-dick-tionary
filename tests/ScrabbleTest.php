@@ -23,21 +23,30 @@
         }
 
         function test_remove_non_alphabetical_characters() {
-            $input = 'l33t h4x0r';
+            $input = 'fri4 end';
             $test_scrabble = new Scrabble;
 
             $result = $test_scrabble->check_score($input);
 
-            $this->assertEquals($result, 15);
+            $this->assertEquals($result, 10);
         }
 
-        function test_check_word_exists() {
-            $input = 'hypocrite';
+        // function test_check_word_exists() {
+        //     $input = 'hypocrite';
+        //     $test_scrabble = new Scrabble;
+        //
+        //     $result = $test_scrabble->check_score($input);
+        //
+        //     $this->assertEquals(true, $result);
+        // }
+
+        function test_check_word_does_not_exist() {
+            $input = 'asdf';
             $test_scrabble = new Scrabble;
 
-            $result = $test_scrabble->check_word($input);
+            $result = $test_scrabble->check_score($input);
 
-            $this->assertEquals(1, $result);
+            $this->assertEquals(false, $result);
         }
 
 

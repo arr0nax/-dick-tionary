@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>score</title>
+    </head>
+    <body>
+        {% if word_score %}
+            <h3>Your word is: {{ word }}</h3>
+            <h3>Your score is: {{ word_score }}</h3>
+            {% else %}
+                <h3>{{ word }} isn't a word, dummy!</h3>
+        {% endif %}
+            <a href="/"><button>Enter another word</button></a>
+    </body>
+</html>
