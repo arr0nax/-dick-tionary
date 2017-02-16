@@ -5,11 +5,14 @@
         <title>score</title>
     </head>
     <body>
-        {% if word_score %}
+        {% if type == 'word'%}
             <h3>Your word is: {{ word }}</h3>
             <h3>Your score is: {{ word_score }}</h3>
-            {% else %}
-                <h3>{{ word }} isn't a word, dummy!</h3>
+        {% elseif type == 'slang'%}
+            <h3> {{ word }} isn't a word, dummy!</h3>
+            <h3>But, it does mean this: {{word_score}} </h3>
+        {% else %}
+            <h3> {{word}} isn't a word. It's not even in the <i>urban</i> dictionary...</h3>
         {% endif %}
             <a href="/"><button>Enter another word</button></a>
     </body>

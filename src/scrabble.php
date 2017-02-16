@@ -23,19 +23,28 @@
             }
             else
             {
-                return false;
+                $slang = $this->check_slang($word);
+                if($slang) {
+                    return $slang;
+                }
+                else {
+                    return false;
+                }
             }
         }
 
         function check_word($word) {
             $word_url = 'http://www.dictionaryapi.com/api/v1/references/collegiate/xml/'.$word.'?key=59c48b7e-eff8-4bd0-9c5b-ad0781f94ca3';
             $response = file_get_contents($word_url);
+            if ($response) {
+                $word_data = simplexml_load_string($response);
 
-            $word_data = simplexml_load_string($response);
-
-            // return $word_data['@attributes']['entry']['@attributes']['id'];
-            if ($word_data->entry->ew == $word) {
-                return true;
+                // return $word_data['@attributes']['entry']['@attributes']['id'];
+                if ($word_data->entry->ew == $word) {
+                    return true;
+                } else {
+                    return false;
+                }
             } else {
                 return false;
             }
@@ -56,7 +65,14 @@
 
             $result = curl_exec($curl);
             $result = json_decode($result);
-            return $result;
+            if ($result->result_type != 'no_results') {
+                $def_list = count($result->list);
+                $choose = rand(0, $def_list-1);
+                return $result->list[$choose]->definition;
+                // return $result;
+            } else {
+                return false;
+            }
         }
 
     }
